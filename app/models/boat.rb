@@ -27,7 +27,11 @@ class Boat < ActiveRecord::Base #:nodoc:
     joins(:classifications).where(classifications: { name: 'Sailboat' })
   end
 
+  def self.boats_by_name(boat_name)
+    joins(:classifications).where(classifications: { name: boat_name.to_s.capitalize })
+  end
+
   def self.with_three_classifications
-    joins(:boat_classifications).group(:boat_id).having("count(*) = 3")
+    joins(:boat_classifications).group(:boat_id).having('count(*) = 3')
   end
 end
