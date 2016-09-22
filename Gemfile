@@ -1,5 +1,4 @@
 source 'https://rubygems.org'
-ruby '2.3.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2'
@@ -37,5 +36,9 @@ group :test, :development do
   gem "rspec-rails"
   gem "factory_girl_rails"
   gem "database_cleaner"
-  gem "pry"
+  gem "pry-rails"
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'guard'
+  gem 'guard-livereload', '~> 2.5', require: false
 end
