@@ -5,7 +5,7 @@ class Captain < ActiveRecord::Base
     # Solution v1 using helper method in Boat class
     boats = Boat.boats_by_name('catamaran')
     captain_ids = boats.map(&:captain_id)
-    where(id: captain_ids)
+    where(id: captain_ids).distinct
 
     # Solution v2 using raw SQL statements
 
@@ -46,6 +46,14 @@ class Captain < ActiveRecord::Base
   end
 
   def self.talented_seamen
+    t_seamen = sailors & joins(boats: :classifications).where(classifications:
+    {
+      name: 'Motorboat'
+    }).distinct
+    where(id: t_seamen.map(&:id))
+  end
 
+  def self.non_sailors
+    where.not(id: sailors)
   end
 end
